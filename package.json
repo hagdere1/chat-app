@@ -7,6 +7,7 @@
     "lib": "lib"
   },
   "dependencies": {
+    "@material-ui/core": "^1.2.2",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-preset-es2015": "^6.24.1",
