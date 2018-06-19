@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_and_belongs_to_many :channels
+
   def generate_auth_token
     auth_token = SecureRandom.hex
     self.update_attributes(auth_token: auth_token)

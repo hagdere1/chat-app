@@ -2,11 +2,10 @@ class UsersController < ApplicationController
   skip_before_action :require_login!, only: [:create]
 
   def create
-    user = User.new(user_params)
+    # create and add new user to a general chatroom
+    user = Channel.find_by(name: "General").users.new(user_params)
 
     if user.save
-      # add user to a general chatroom
-
       # login user
       auth_token = user.generate_auth_token
       render json: { status: "success", data: auth_token }, status: 200
