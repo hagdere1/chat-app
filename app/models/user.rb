@@ -5,6 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_and_belongs_to_many :channels
+  has_many :messages
+  has_many :message_saves
+  has_many :saved_messages, through: :message_saves, source: :message
 
   def generate_auth_token
     auth_token = SecureRandom.hex
