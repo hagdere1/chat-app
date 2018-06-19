@@ -29,5 +29,8 @@ module ChatApp
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.generators.stylesheets = false
+    config.generators.javascripts = false
   end
 end

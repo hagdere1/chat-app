@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'static_pages#index'
   devise_for :users
   resource :session, only: [:create, :destroy]
   resources :saved_messages, only: [:create, :destroy]
