@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   resources :messages, only: [:create, :update]
   get '/channels', to: 'channels#index'
   post '/channels/:id/join', to: 'channels#join'
+  mount ActionCable.server => '/cable'
 end

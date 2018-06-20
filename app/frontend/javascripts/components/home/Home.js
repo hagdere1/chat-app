@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import UserApi from '../../api/userApi';
 import ChannelApi from '../../api/channelApi';
+import ChannelList from './ChannelList';
+import ChatWindow from './ChatWindow';
 
 class Home extends React.Component {
   componentDidMount() {
@@ -12,7 +14,10 @@ class Home extends React.Component {
   render() {
     return (
       <div style={{height: "100%"}}>
-        Home
+        <div style={{margin: "auto"}}>
+          <ChannelList />
+          <ChatWindow />
+        </div>
       </div>
     );
   }

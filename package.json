@@ -16,6 +16,7 @@
     "css-loader": "^0.28.11",
     "node-sass": "^4.9.0",
     "react": "^16.4.1",
+    "react-actioncable-provider": "^1.0.3",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",

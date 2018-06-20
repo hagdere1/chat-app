@@ -14,6 +14,10 @@ function channelReducer(state = channelInitState, action) {
         fetched: false,
         error: action.error
       });
+    case "SELECT_CHANNEL":
+      return Object.assign({}, state, {
+        selectedChannel: action.id
+      });
     default:
       return state;
   }

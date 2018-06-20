@@ -1,13 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
+import {ActionCableProvider} from 'react-actioncable-provider'
 import {store} from './store/configureStore';
 import Container from './components/Container';
 // import '../../styles/app.scss';
 
 class App extends React.Component {
   render() {
-    return <div><Container /></div>;
+    return (
+      <ActionCableProvider url={"ws://localhost:3000/cable"}>
+        <Container />
+      </ActionCableProvider>
+    );
   }
 }
 
