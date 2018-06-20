@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   resources :registrations, only: [:create, :update]
   resources :sessions, only: [:create, :destroy]
   resources :saved_messages, only: [:create, :destroy]
-  resources :messages, only: [:create, :update]
-  get '/channels', to: 'channels#index'
+  resources :channels, only: [:index] do
+    resources :messages, only: [:index, :create, :update]
+  end
   post '/channels/:id/join', to: 'channels#join'
   mount ActionCable.server => '/cable'
 end

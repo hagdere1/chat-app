@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Card from '@material-ui/core/Card';
 import { selectChannel } from '../../actions/channelActions';
+import MessageApi from '../../api/messageApi';
 
 const cardStyle = {
   display: "inline-block",
@@ -12,10 +13,21 @@ const cardStyle = {
 }
 
 class ChannelList extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.selectChannel = this.selectChannel.bind(this);
+  }
+
+  selectChannel(id) {
+    this.props.selectChannel(id);
+    this.props.fetchMessages(id, this.props.currentUser.auth_token);
+  }
+
   render() {
     let channels = this.props.channels.map(channel => {
       return (
-        <div key={channel.id} onClick={() => this.props.selectChannel(channel.id)}>
+        <div key={channel.id} onClick={() => this.selectChannel(channel.id)}>
           <b>{channel.name}</b>
         </div>
       );
@@ -37,7 +49,8 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    selectChannel: selectChannel
+    selectChannel: selectChannel,
+    fetchMessages: MessageApi.fetchChannelMessages
   }, dispatch)
 }
 

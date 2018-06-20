@@ -4,7 +4,6 @@ import { axiosConfig } from './axiosConfig';
 class ChannelApi {
   static fetchAllChannels(token) {
     return (dispatch) => {
-      debugger
       axios.get("/channels", axiosConfig(token))
         .then(response => {
           dispatch({type: "FETCH_ALL_CHANNELS_SUCCESS", payload: response.data.data})

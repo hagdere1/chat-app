@@ -1,20 +1,32 @@
 class MessagesController < ApplicationController
-  def create
-    channel = Channel.find_by(channel_id: params[:channel_id])
-    message = channel.messages.new(message_params)
+  def index
+    messages = Message.where(channel_id: params[:channel_id])
+    render json: { status: "success", data: messages }, status: 200
+  end
 
+  def create
+    channel = Channel.find_by(id: params[:channel_id])
+    message = channel.messages.new(message_params)
     if message.save
       serialized_data = ActiveModelSerializers::Adapter::Json.new(
         MessageSerializer.new(message)
       ).serializable_hash
-      MessagesChannel.broadcast_to channel, serialized_data
+      ActionCable.server.broadcast "messages_channel", serialized_data
       head :ok
+    else
+      render json: { message: "Error creating message" }
     end
   end
 
   def update
     message = Message.find_by(id: params[:id])
-    message.update(message_params)
+    if message.update(message_params)
+      serialized_data = ActiveModelSerializers::Adapter::Json.new(
+        MessageSerializer.new(message)
+      ).serializable_hash
+      ActionCable.server.broadcast "messages_channel", serialized_data
+      head :ok
+    end
   end
 
   private
