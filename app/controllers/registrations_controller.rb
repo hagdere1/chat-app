@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class RegistrationsController < ApplicationController
   skip_before_action :require_login!, only: [:create]
 
   def create
@@ -6,11 +6,10 @@ class UsersController < ApplicationController
     user = Channel.find_by(name: "General").users.new(user_params)
 
     if user.save
-      # login user
       auth_token = user.generate_auth_token
-      render json: { status: "success", data: auth_token }, status: 200
+      render json: { status: "success", data: user }, status: 200
     else
-      render json: { status: "failure", message: "Failed to create user" }, status: 500
+      render json: { message: "Failed to create user" };
     end
   end
 

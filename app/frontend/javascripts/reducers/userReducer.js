@@ -1,8 +1,10 @@
-import userInitState from '../initState/userInitState.json'
+import userInitState from '../initState/userInitState.json';
+import axios from 'axios'
 
 function userReducer(state = userInitState, action) {
   switch(action.type) {
     case "LOGIN_USER_SUCCESS":
+      // axios.defaults.headers.common['Authorization'] = "Bearer-" + action.payload.auth_token;
       return Object.assign({}, state, {currentUser: action.payload, loginFailed: false});
     case "LOGIN_USER_FAILURE":
       return Object.assign({}, state, {loginFailed: true});

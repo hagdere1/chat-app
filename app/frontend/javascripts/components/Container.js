@@ -1,16 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import LoginPage from './login/LoginPage';
+import Home from './home/Home';
 
 class Container extends React.Component {
   render() {
-    return <div>Container / Login Page</div>;
+    if (this.props.currentUser.auth_token) {
+      return <Home />;
+    } else {
+      return <LoginPage />;
+    }
   }
 }
 
 function mapStateToProps(state) {
   return {
-    state
+    currentUser: state.user.currentUser
   };
 }
 function mapDispatchToProps(dispatch) {

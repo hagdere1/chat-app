@@ -1,6 +1,7 @@
 class ChannelsController < ApplicationController
   def index
-    channel = Channel.all
+    channels = Channel.all
+    render json: { status: "success", data: channels }, status: 200
   end
 
   def join

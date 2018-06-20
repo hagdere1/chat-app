@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root 'static_pages#index'
   devise_for :users
-  resource :session, only: [:create, :destroy]
+  resources :registrations, only: [:create, :update]
+  resources :sessions, only: [:create, :destroy]
   resources :saved_messages, only: [:create, :destroy]
   resources :messages, only: [:create, :update]
   get '/channels', to: 'channels#index'

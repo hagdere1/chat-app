@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  protect_from_forgery with: :null_session
   before_action :require_login!
 
   def require_login!
@@ -13,7 +14,7 @@ class ApplicationController < ActionController::Base
   private
     def authenticate
       authenticate_with_http_token do |token, options|
-        User.find_by(auth_token: token).first
+        User.find_by(auth_token: token)
       end
     end
 end
