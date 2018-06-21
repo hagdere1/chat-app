@@ -1,4 +1,7 @@
 Rails.application.configure do
+  config.web_socket_server_url = "wss://rails-chat-app.herokuapp.com/cable"
+  config.action_cable.allowed_request_origins = ['https://rails-chat-app.herokuapp.com', 'http://rails-chat-app.herokuapp.com']
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
