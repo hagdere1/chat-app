@@ -11,6 +11,7 @@ class Container extends React.Component {
     let currentUser = getCookie("currentUser");
 
     if (currentUser) {
+      console.log(currentUser);
       this.props.setCurrentUserFromCookie(typeof currentUser === "string" ? JSON.parse(currentUser) : currentUser);
     }
   }
