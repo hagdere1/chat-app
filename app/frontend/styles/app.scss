@@ -4,5 +4,10 @@
 }
 
 body {
-  background-color: black;
+  background-color: #f8f8f8;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+.channel-item:hover {
+  background-color: #deeff5 !important;
 }

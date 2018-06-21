@@ -1,7 +1,10 @@
 class MessagesController < ApplicationController
   def index
     messages = Message.where(channel_id: params[:channel_id])
-    render json: { status: "success", data: messages }, status: 200
+    render json: {
+      status: "success",
+      data: ActiveModel::Serializer::CollectionSerializer.new(messages, each_serializer: MessageSerializer)
+    }, status: 200
   end
 
   def create

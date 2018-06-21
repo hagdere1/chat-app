@@ -12,5 +12,10 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    authenticate_with_http_token do |token, options|
+      user = User.find_by(auth_token: token)
+      user.reset_auth_token
+    end
+    render json: { status: "success" }, status: 200
   end
 end

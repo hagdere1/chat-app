@@ -5,6 +5,8 @@ import UserApi from '../../api/userApi';
 import ChannelApi from '../../api/channelApi';
 import ChannelList from './ChannelList';
 import ChatWindow from './ChatWindow';
+import MenuAppBar from './MenuAppBar';
+import Card from '@material-ui/core/Card';
 
 class Home extends React.Component {
   componentDidMount() {
@@ -14,10 +16,12 @@ class Home extends React.Component {
   render() {
     return (
       <div style={{height: "100%"}}>
-        <div style={{margin: "auto"}}>
+        <MenuAppBar />
+
+        <Card style={{margin: "auto", width: "100%", maxWidth: 1010}}>
           <ChannelList />
           <ChatWindow />
-        </div>
+        </Card>
       </div>
     );
   }

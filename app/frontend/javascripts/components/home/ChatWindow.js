@@ -5,12 +5,18 @@ import Card from '@material-ui/core/Card';
 import { ActionCable } from 'react-actioncable-provider';
 import axios from 'axios';
 import { axiosConfig } from '../../api/axiosConfig';
+import { animateScroll } from "react-scroll";
 import { receiveMessage } from '../../actions/messageActions';
+import TextField from '../TextField';
+import Button from '@material-ui/core/Button';
+import MessageList from './MessageList';
 
 const cardStyle = {
   display: "inline-block",
-  width: "55%",
-  height: 500
+  width: "70%",
+  height: 500,
+  verticalAlign: "top",
+  position: "relative"
 }
 
 class ChatWindow extends React.Component {
@@ -25,6 +31,13 @@ class ChatWindow extends React.Component {
     this.sendMessage = this.sendMessage.bind(this);
     this.handleReceivedMessage = this.handleReceivedMessage.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
+    this.scrollToBottom = this.scrollToBottom.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.messages !== nextProps.messages) {
+      this.scrollToBottom();
+    }
   }
 
   handleContentChange(e) {
@@ -34,6 +47,7 @@ class ChatWindow extends React.Component {
   handleReceivedMessage(response) {
     if (response.message.channel_id === this.props.selectedChannel) {
       this.props.receiveMessage(response.message);
+      this.scrollToBottom();
     }
   }
 
@@ -46,32 +60,46 @@ class ChatWindow extends React.Component {
 
     axios.post("/channels/" + this.props.selectedChannel + "/messages/", message, axiosConfig(token));
 
+    this.scrollToBottom();
     this.setState({ content: "" });
+  }
+
+  scrollToBottom() {
+    animateScroll.scrollToBottom({
+      containerId: "chatwindow",
+      duration: 50
+    });
   }
 
   render() {
     let selectedChannel = this.props.selectedChannel;
 
-    let messageBox = this.props.selectedChannel ? (
-      <div style={{height: 150, borderTop: "1px solid #ccc"}}>
-        <input type="text" value={this.state.content} onChange={this.handleContentChange} />
-        <div onClick={this.sendMessage}>SEND</div>
+    let messageBox = selectedChannel ? (
+      <div style={{height: 100, borderTop: "1px solid #ccc", width: "100%"}}>
+        <div style={{verticalAlign: "bottom", marginTop: 10, marginLeft: 20}}>
+          <TextField value={this.state.content}
+                     width={380}
+                     inputLabel={"Write a message..."}
+                     handleTextChange={this.handleContentChange} />
+          <Button onClick={this.sendMessage} style={{display: "inline-block", marginLeft: 10}} color="primary">SEND</Button>
+        </div>
       </div>
     ) : <div></div>;
 
+    let selectAChannel = <p style={{margin: "auto", textAlign: "center", marginTop: 150}}>Select a Channel</p>;
+
     return (
-      <Card style={cardStyle}>
-        {selectedChannel ?
-        this.props.channels.find(channel => channel.id === selectedChannel).name :
-        "Select a Channel"}
+      <div style={cardStyle}>
+        <div id="chatwindow" style={{height: 400, overflowY: "scroll", overflowX: "hidden", width: "100%"}}>
+          <ActionCable channel={{channel: "MessagesChannel", channelId: selectedChannel}}
+                       onReceived={this.handleReceivedMessage} />
 
-        <ActionCable channel={{channel: "MessagesChannel", channelId: selectedChannel}}
-                     onReceived={this.handleReceivedMessage} />
+           {selectedChannel ? <MessageList messages={this.props.messages} /> : <div></div>}
 
-        {this.props.messages.map(message => <div key={message.id}>{message.content}</div>)}
+        </div>
 
         {messageBox}
-      </Card>
+      </div>
     );
   }
 }

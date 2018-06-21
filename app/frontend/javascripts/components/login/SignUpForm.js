@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import UserApi from '../../api/userApi';
 import axios from 'axios';
+import TextField from '../TextField';
+import Button from '@material-ui/core/Button';
 
 class SignUpForm extends React.Component {
   constructor(props) {
@@ -41,6 +43,7 @@ class SignUpForm extends React.Component {
   submit() {
     let user = {
       email: this.state.email,
+      username: this.state.username,
       password: this.state.password,
       password_confirmation: this.state.passwordConfirmation
     }
@@ -50,23 +53,38 @@ class SignUpForm extends React.Component {
 
   render() {
     return (
-      <div style={{position: "absolute", top: 100, left: 200, backgroundColor: "white", height: 350, width: 400, borderRadius: 2}}>
-        <div>
-          <p>Email</p>
-          <input type="text" value={this.state.email} onChange={this.handleChangeEmail} />
+      <div style={{boxShadow: "1px 2px #ccc", border: "1px solid #eee", position: "absolute", paddingTop: 15, top: 0, bottom: 0, left: 0, right: 0, margin: "auto", backgroundColor: "white", height: 345, width: 400, borderRadius: 2}}>
+        <div style={{display: "inline-block", marginLeft: 42, width: 300}}>
+          <TextField value={this.state.email}
+                     width={300}
+                     inputLabel={"Email"}
+                     handleTextChange={this.handleChangeEmail} />
 
-          {/*<p>Username</p>
-          <input type="text" value={this.state.username} onChange={this.handleChangeUsername} />*/}
+          <TextField value={this.state.username}
+                     width={300}
+                     inputLabel={"Username"}
+                     handleTextChange={this.handleChangeUsername} />
 
-          <p>Password</p>
-          <input type="text" value={this.state.password} onChange={this.handleChangePassword} />
+          <TextField value={this.state.password}
+                     type={"password"}
+                     width={300}
+                     inputLabel={"Password"}
+                     handleTextChange={this.handleChangePassword} />
 
-          <p>Password Confirmation</p>
-          <input type="text" value={this.state.passwordConfirmation} onChange={this.handleChangePasswordConfirmation} />
+          <TextField value={this.state.passwordConfirmation}
+                     type={"password"}
+                     width={300}
+                     inputLabel={"Password"}
+                     handleTextChange={this.handleChangePasswordConfirmation} />
 
-          <div onClick={this.submit}>Submit</div>
+          <div style={{display: "inline-block", marginLeft: 8, marginTop: 20}}>
+            <Button onClick={this.submit} variant="contained" color="primary">Sign Up</Button>
+          </div>
 
-          <div>Already a member? <span onClick={this.props.toggleForm}>Sign In</span></div>
+          <div style={{display: "inline-block", marginTop: 10, marginLeft: 20, fontSize: 12}}>
+            <span>Already a member?</span>
+            <span style={{color: "#0000ff", marginLeft: 5, cursor: "pointer"}} onClick={this.props.toggleForm}>Sign In</span>
+          </div>
         </div>
       </div>
     );

@@ -10,8 +10,9 @@ function userReducer(state = userInitState, action) {
     case "LOGIN_USER_FAILURE":
       return Object.assign({}, state, {loginFailed: true});
 
-    case "LOGOUT_USER":
-      return Object.assign({}, state, {currentUser: {}, loginFailed: false});
+    case "LOGOUT_USER_SUCCESS":
+      document.cookie = "currentUser=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+      return Object.assign({}, state, {currentUser: {}});
 
     case "SIGN_UP_USER_SUCCESS":
       document.cookie = "currentUser=" + JSON.stringify(action.payload);

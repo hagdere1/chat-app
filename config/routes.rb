@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   root 'static_pages#index'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
   devise_for :users
   resources :registrations, only: [:create, :update]
-  resources :sessions, only: [:create, :destroy]
   resources :saved_messages, only: [:create, :destroy]
   resources :channels, only: [:index] do
     resources :messages, only: [:index, :create, :update]

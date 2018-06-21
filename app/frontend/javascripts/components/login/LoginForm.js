@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import UserApi from '../../api/userApi';
 import axios from 'axios';
+import TextField from '../TextField';
+import Button from '@material-ui/core/Button';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -44,20 +46,28 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div style={{position: "absolute", top: 100, left: 200, backgroundColor: "white", height: 350, width: 400, borderRadius: 2}}>
-        <div>
-          <p>Email</p>
-          <input type="text" value={this.state.email} onChange={this.handleChangeEmail} />
+      <div style={{boxShadow: "1px 2px #ccc", border: "1px solid #eee",position: "absolute", paddingTop: 15, top: 0, bottom: 0, left: 0, right: 0, margin: "auto", backgroundColor: "white", height: 215, width: 400, borderRadius: 2}}>
+        <div style={{display: "inline-block", marginLeft: 42, width: 300}}>
+          <TextField value={this.state.email}
+                     width={300}
+                     inputLabel={"Email"}
+                     handleTextChange={this.handleChangeEmail} />
 
           {/*<p>Username</p>
           <input type="text" value={this.state.username} onChange={this.handleChangeUsername} />*/}
 
-          <p>Password</p>
-          <input type="text" value={this.state.password} onChange={this.handleChangePassword} />
+          <TextField value={this.state.password}
+                     width={300}
+                     inputLabel={"Password"}
+                     type={"password"}
+                     handleTextChange={this.handleChangePassword} />
 
-          <div onClick={this.submit}>Submit</div>
+            <div style={{display: "inline-block", marginLeft: 8, marginTop: 20}}><Button onClick={this.submit} variant="contained" color="primary">Sign In</Button></div>
 
-          <div>Not a member? <span onClick={this.props.toggleForm}>Sign Up</span></div>
+            <div style={{display: "inline-block", marginTop: 10, marginLeft: 20, fontSize: 12}}>
+              <span>Not a member?</span>
+              <span style={{color: "#0000ff", marginLeft: 5, cursor: "pointer"}} onClick={this.props.toggleForm}>Sign Up</span>
+            </div>
         </div>
       </div>
     );

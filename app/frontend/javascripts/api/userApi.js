@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { axiosConfig } from './axiosConfig';
 
 class UserApi {
   static signUp(user) {
@@ -15,7 +16,7 @@ class UserApi {
 
   static login(user) {
     return (dispatch) => {
-      axios.post("http://localhost:3000/sessions", {user: user})
+      axios.post("http://localhost:3000/login", {user: user})
         .then(response => {
           dispatch({type: "LOGIN_USER_SUCCESS", payload: response.data.data})
         })
@@ -25,9 +26,9 @@ class UserApi {
     }
   }
 
-  static logout(user) {
+  static logout(token) {
     return (dispatch) => {
-      axios.delete("http://localhost:3000/session", {user: user})
+      axios.delete("http://localhost:3000/logout", axiosConfig(token))
         .then(response => {
           dispatch({type: "LOGOUT_USER_SUCCESS", payload: true})
         })

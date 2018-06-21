@@ -7,9 +7,10 @@ import MessageApi from '../../api/messageApi';
 
 const cardStyle = {
   display: "inline-block",
-  width: "25%",
+  width: "calc(30% - 2px)",
+  borderRight: "2px solid #eee",
   height: 500,
-  marginRight: 10
+  verticalAlign: "top"
 }
 
 class ChannelList extends React.Component {
@@ -19,31 +20,43 @@ class ChannelList extends React.Component {
     this.selectChannel = this.selectChannel.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.channelsFetched && nextProps.channelsFetched) {
+      this.selectChannel(nextProps.channels.find(channel => channel.name === "General").id);
+    }
+  }
+
   selectChannel(id) {
-    this.props.selectChannel(id);
-    this.props.fetchMessages(id, this.props.currentUser.auth_token);
+    if (id !== this.props.selectedChannel) {
+      this.props.selectChannel(id);
+      this.props.fetchMessages(id, this.props.currentUser.auth_token);
+    }
   }
 
   render() {
+    let selectedChannel = this.props.selectedChannel;
     let channels = this.props.channels.map(channel => {
+      let isSelected = channel.id === selectedChannel;
       return (
-        <div key={channel.id} onClick={() => this.selectChannel(channel.id)}>
-          <b>{channel.name}</b>
+        <div className="channel-item" key={channel.id} style={{position: "relative", fontWeight: "bold", backgroundColor: "#f0f8ff", height: 50, padding: "7px 12px", borderBottom: "2px solid #eee", cursor: "pointer"}} onClick={() => this.selectChannel(channel.id)}>
+          <span style={{position: "absolute", top: 22}}>{channel.name}</span>
         </div>
       );
     });
 
     return (
-      <Card style={cardStyle}>
+      <div style={cardStyle}>
         {channels}
-      </Card>
+      </div>
     );
   }
 }
 
 function mapStateToProps(state) {
   return {
+    selectedChannel: state.channel.selectedChannel,
     channels: state.channel.channels,
+    channelsFetched: state.channel.fetched,
     currentUser: state.user.currentUser
   };
 }
