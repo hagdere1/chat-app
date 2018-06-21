@@ -10,5 +10,3 @@
 if !Channel.find_by(name: "General")
   Channel.create(name: "General")
 end
-
-Channel.find_by(name: "General").messages.create({user_id: User.first.id})
