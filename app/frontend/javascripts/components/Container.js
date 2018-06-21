@@ -11,15 +11,13 @@ class Container extends React.Component {
     let currentUser = getCookie("currentUser");
 
     if (currentUser) {
-      this.props.setCurrentUserFromCookie(JSON.parse(currentUser));
+      this.props.setCurrentUserFromCookie(typeof currentUser === "string" ? JSON.parse(currentUser) : currentUser);
     }
   }
 
 
   render() {
-    let currentUser = getCookie("currentUser");
-
-    if (this.props.currentUser.auth_token) {
+    if (this.props.currentUser && this.props.currentUser.auth_token) {
       return <Home />;
     } else {
       return <LoginPage />;

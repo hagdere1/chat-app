@@ -1,10 +1,14 @@
 export const axiosConfig = (token) => {
-	const fullToken = 'Token token=' + token
+	const env = 'prod';
+	const fullToken = 'Token token=' + token;
 	return {
-		baseUrl: 'https://rails-chat-app.herokuapp.com',
+		baseUrl: env === 'dev' ? 'http://localhost:3000' : 'https://rails-chat-app.herokuapp.com',
 		headers: {
 			'Content-Type': 'application/json',
 			'Authorization': fullToken
 		}
 	}
 }
+
+// export const wsUrl = 'ws://localhost:3000/cable';
+export const wsUrl = 'wss://rails-chat-app.herokuapp.com/cable';

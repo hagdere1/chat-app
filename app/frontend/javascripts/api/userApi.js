@@ -6,6 +6,7 @@ class UserApi {
     return (dispatch) => {
       axios.post("/registrations", {user: user})
         .then(response => {
+          debugger
           dispatch({type: "SIGN_UP_USER_SUCCESS", payload: response.data.data})
         })
         .catch(error => {

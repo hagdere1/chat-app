@@ -4,7 +4,7 @@ import axios from 'axios'
 function userReducer(state = userInitState, action) {
   switch(action.type) {
     case "LOGIN_USER_SUCCESS":
-      document.cookie = "currentUser=" + JSON.stringify(action.payload);
+      document.cookie = "currentUser=" + (typeof action.payload !== "string" ? JSON.stringify(action.payload) : action.payload);
       return Object.assign({}, state, {currentUser: action.payload, loginFailed: false});
 
     case "LOGIN_USER_FAILURE":
@@ -15,7 +15,7 @@ function userReducer(state = userInitState, action) {
       return Object.assign({}, state, {currentUser: {}});
 
     case "SIGN_UP_USER_SUCCESS":
-      document.cookie = "currentUser=" + JSON.stringify(action.payload);
+      document.cookie = "currentUser=" + (typeof action.payload !== "string" ? JSON.stringify(action.payload) : action.payload);
       return Object.assign({}, state, {currentUser: action.payload, signUpFailed: false});
 
     case "SIGN_UP_USER_FAILURE":

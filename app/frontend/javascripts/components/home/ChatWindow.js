@@ -10,6 +10,7 @@ import { receiveMessage } from '../../actions/messageActions';
 import TextField from '../TextField';
 import Button from '@material-ui/core/Button';
 import MessageList from './MessageList';
+import MessageApi from '../../api/messageApi';
 
 const cardStyle = {
   display: "inline-block",
@@ -58,7 +59,8 @@ class ChatWindow extends React.Component {
       content: this.state.content
     }
 
-    axios.post("/channels/" + this.props.selectedChannel + "/messages/", message, axiosConfig(token));
+    this.props.createMessage(message, this.props.selectedChannel, token);
+    // axios.post("/channels/" + this.props.selectedChannel + "/messages/", message, axiosConfig(token));
 
     this.scrollToBottom();
     this.setState({ content: "" });
@@ -114,7 +116,8 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    receiveMessage: receiveMessage
+    receiveMessage: receiveMessage,
+    createMessage: MessageApi.createMessage
   }, dispatch)
 }
 
