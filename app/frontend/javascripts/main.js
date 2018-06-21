@@ -9,7 +9,7 @@ import '../styles/app.scss';
 class App extends React.Component {
   render() {
     return (
-      <ActionCableProvider url={"ws://rails-chat-app.herokuapp.com/cable"}>
+      <ActionCableProvider url={"wss://rails-chat-app.herokuapp.com/cable"}>
         <Container />
       </ActionCableProvider>
     );
