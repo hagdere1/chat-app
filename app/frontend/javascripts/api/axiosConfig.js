@@ -1,5 +1,6 @@
 export const axiosConfig = (token) => {
 	const env = 'prod';
+	// const env = 'dev';
 	const fullToken = 'Token token=' + token;
 	return {
 		baseUrl: env === 'dev' ? 'http://localhost:3000' : 'https://rails-chat-app.herokuapp.com',
