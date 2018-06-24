@@ -10,7 +10,7 @@ import { receiveMessage } from '../../actions/messageActions';
 import TextField from '../TextField';
 import Button from '@material-ui/core/Button';
 import MessageList from './MessageList';
-import MessageApi from '../../api/messageApi';
+import MessageBox from './MessageBox';
 
 const cardStyle = {
   display: "inline-block",
@@ -28,10 +28,9 @@ class ChatWindow extends React.Component {
       content: ""
     }
 
-    this.handleContentChange = this.handleContentChange.bind(this);
-    this.sendMessage = this.sendMessage.bind(this);
+    // this.handleContentChange = this.handleContentChange.bind(this);
+    // this.sendMessage = this.sendMessage.bind(this);
     this.handleReceivedMessage = this.handleReceivedMessage.bind(this);
-    this.sendMessage = this.sendMessage.bind(this);
     this.scrollToBottom = this.scrollToBottom.bind(this);
   }
 
@@ -71,20 +70,7 @@ class ChatWindow extends React.Component {
   }
 
   render() {
-    let selectedChannel = this.props.selectedChannel;
-
-    let messageBox = selectedChannel ? (
-      <div style={{height: 100, borderTop: "1px solid #ccc", width: "100%"}}>
-        <div style={{verticalAlign: "bottom", marginTop: 10, marginLeft: 20}}>
-          <TextField value={this.state.content}
-                     width={380}
-                     inputLabel={"Write a message..."}
-                     handleTextChange={this.handleContentChange} />
-          <Button onClick={this.sendMessage} style={{display: "inline-block", marginLeft: 10}} color="primary">SEND</Button>
-        </div>
-      </div>
-    ) : <div></div>;
-
+    // Placeholder if no channel selected - currently user unable to deselect all chatrooms
     let selectAChannel = <p style={{margin: "auto", textAlign: "center", marginTop: 150}}>Select a Channel</p>;
 
     return (
@@ -93,11 +79,10 @@ class ChatWindow extends React.Component {
           <ActionCable channel={{channel: "MessagesChannel", channelId: selectedChannel}}
                        onReceived={this.handleReceivedMessage} />
 
-           {selectedChannel ? <MessageList messages={this.props.messages} /> : <div></div>}
-
+          {selectedChannel ? <MessageList messages={this.props.messages} /> : <div></div>}
         </div>
 
-        {messageBox}
+        <MessageBox scrollToBottom={this.scrollToBottom} />
       </div>
     );
   }
@@ -114,7 +99,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     receiveMessage: receiveMessage,
-    createMessage: MessageApi.createMessage
+    // createMessage: MessageApi.createMessage
   }, dispatch)
 }
 

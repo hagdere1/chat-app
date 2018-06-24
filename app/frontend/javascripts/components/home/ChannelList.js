@@ -18,7 +18,7 @@ class ChannelList extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.selectChannel = this.selectChannel.bind(this);
+    this.selectChannel = this.selectChannel.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
