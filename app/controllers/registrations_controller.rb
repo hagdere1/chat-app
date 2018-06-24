@@ -9,7 +9,7 @@ class RegistrationsController < ApplicationController
       auth_token = user.generate_auth_token
       render json: { status: "success", data: user }, status: 200
     else
-      render json: { message: "Failed to create user" };
+      render json: { message: "Failed to create user" }, status: 500;
     end
   end
 
