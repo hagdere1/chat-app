@@ -38,6 +38,16 @@ class UserApi {
         })
     }
   }
+
+  static fetchCurrentUser(token) {
+    return (dispatch) => {
+      axios.get("/currentuser", axiosConfig(token))
+        .then(response => {
+          debugger
+          dispatch({type: "FETCH_CURRENT_USER_SUCCESS", payload: response.data.data})
+        });
+    }
+  }
 }
 
 export default UserApi;

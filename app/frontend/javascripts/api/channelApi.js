@@ -9,7 +9,7 @@ class ChannelApi {
           dispatch({type: "FETCH_ALL_CHANNELS_SUCCESS", payload: response.data.data})
         })
         .catch(error => {
-          dispatch({type: "FETCH_ALL_CHANNGELS_FAILURE", payload: error})
+          dispatch({type: "FETCH_ALL_CHANNELS_FAILURE", payload: error})
         })
     }
   }

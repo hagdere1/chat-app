@@ -4,17 +4,16 @@ import { bindActionCreators } from 'redux';
 import LoginPage from './login/LoginPage';
 import Home from './home/Home';
 import { getCookie } from '../util/auth';
-import { setCurrentUserFromCookie } from '../actions/userActions';
+import UserApi from '../api/userApi';
 
 class Container extends React.Component {
   componentDidMount() {
-    let currentUser = getCookie("currentUser");
-
-    if (currentUser) {
-      this.props.setCurrentUserFromCookie(typeof currentUser === "string" ? JSON.parse(currentUser) : currentUser);
+    let token = getCookie("token");
+debugger
+    if (token) {
+      this.props.fetchCurrentUser(token);
     }
   }
-
 
   render() {
     if (this.props.currentUser && this.props.currentUser.auth_token) {
@@ -32,7 +31,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    setCurrentUserFromCookie: setCurrentUserFromCookie
+    fetchCurrentUser: UserApi.fetchCurrentUser
   }, dispatch)
 }
 

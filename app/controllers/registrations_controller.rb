@@ -13,6 +13,14 @@ class RegistrationsController < ApplicationController
     end
   end
 
+  def show
+    if current_user
+      render json: { status: "success", data: current_user }, status: 200
+    else
+      render json: { status: "failure", message: "User not authenticated." }, status: 200
+    end
+  end
+
   def update
   end
 
