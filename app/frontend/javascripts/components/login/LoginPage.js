@@ -31,11 +31,8 @@ class LoginPage extends React.Component {
     }
 
     return (
-      <div style={{height: "100vh", position: "relative"}}>
-        <div style={{backgroundColor: "#3f51b5", height: "40%", width: "100%"}}>
-          <h1 style={{fontSize: "1.3125rem", fontWeight: 500, color: "#fff", padding: "17px 20px"}}>LoftSmart Chat</h1>
-        </div>
-        <div style={{backgroundColor: "#deeff5", height: "60%", width: "100%"}}></div>
+      <div style={{height: "100vh", position: "relative", background: "linear-gradient(to bottom, #3f51b5 0%,#3f51b5 40%,#000000 40%,#eee 40%,#eee 100%)"}}>
+        <h1 style={{fontSize: "1.3125rem", fontWeight: 500, color: "#fff", padding: "17px 20px"}}>LoftSmart Chat</h1>
 
         {this.state.signUp ? <SignUpForm toggleForm={this.toggleForm} /> : <LoginForm toggleForm={this.toggleForm} />}
       </div>

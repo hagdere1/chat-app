@@ -1,6 +1,6 @@
 {
   "currentUser": {},
-  "loginFailed": false,
+  "error": false,
   "signUpFailed": false,
   "fetching": false,
   "fetched": false

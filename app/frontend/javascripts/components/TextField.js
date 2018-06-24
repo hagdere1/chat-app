@@ -22,7 +22,7 @@ class TextField extends React.Component {
 
     return (
       <div style={{display: "inline-block"}} className={classes.container}>
-        <FormControl className={classes.formControl}>
+        <FormControl error={this.props.error} className={classes.formControl}>
           <InputLabel htmlFor="text-simple">{this.props.inputLabel}</InputLabel>
           <Input type={this.props.type} style={{width: this.props.width}} id="text-simple" value={this.props.value} onChange={this.props.handleTextChange} />
         </FormControl>

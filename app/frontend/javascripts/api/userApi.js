@@ -22,7 +22,7 @@ class UserApi {
           dispatch({type: "LOGIN_USER_SUCCESS", payload: response.data.data})
         })
         .catch(error => {
-          dispatch({type: "LOGIN_USER_FAILURE", payload: error})
+          dispatch({type: "LOGIN_USER_FAILURE", payload: error.response.data.message})
         })
     }
   }

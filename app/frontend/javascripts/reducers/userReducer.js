@@ -8,11 +8,14 @@ function userReducer(state = userInitState, action) {
       return Object.assign({}, state, {
         currentUser: action.payload,
         fetched: true,
-        loginFailed: false
+        error: false
       });
 
     case "LOGIN_USER_FAILURE":
-      return Object.assign({}, state, {loginFailed: true});
+      return Object.assign({}, state, {
+        loginFailed: true,
+        error: action.payload
+      });
 
     case "LOGOUT_USER_SUCCESS":
       document.cookie = "token=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
@@ -23,7 +26,8 @@ function userReducer(state = userInitState, action) {
       return Object.assign({}, state, {
         currentUser: action.payload,
         fetched: true,
-        signUpFailed: false
+        signUpFailed: false,
+        error: false
       });
 
     case "SIGN_UP_USER_FAILURE":

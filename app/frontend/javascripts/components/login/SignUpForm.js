@@ -53,7 +53,7 @@ class SignUpForm extends React.Component {
 
   render() {
     return (
-      <div style={{boxShadow: "1px 2px #ccc", border: "1px solid #eee", position: "absolute", paddingTop: 15, top: 0, bottom: 0, left: 0, right: 0, margin: "auto", backgroundColor: "white", height: 345, width: 400, borderRadius: 2}}>
+      <div style={{boxShadow: "1px 2px #ccc", border: "1px solid #eee", position: "absolute", paddingTop: 15, paddingBottom: 15, top: 0, bottom: 0, left: 0, right: 0, margin: "auto", backgroundColor: "white", minHeight: 345, maxHeight: 345, width: 400, borderRadius: 2}}>
         <div style={{display: "inline-block", marginLeft: 42, width: 300}}>
           <TextField value={this.state.email}
                      width={300}
@@ -85,6 +85,8 @@ class SignUpForm extends React.Component {
             <span>Already a member?</span>
             <span style={{color: "#0000ff", marginLeft: 5, cursor: "pointer"}} onClick={this.props.toggleForm}>Sign In</span>
           </div>
+
+          <p></p>
         </div>
       </div>
     );

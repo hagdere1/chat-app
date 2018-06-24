@@ -46,9 +46,10 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div style={{boxShadow: "1px 2px #ccc", border: "1px solid #eee",position: "absolute", paddingTop: 15, top: 0, bottom: 0, left: 0, right: 0, margin: "auto", backgroundColor: "white", height: 215, width: 400, borderRadius: 2}}>
+      <div style={{boxShadow: "1px 2px #ccc", border: "1px solid #eee",position: "absolute", paddingTop: 15, paddingBottom: 15, top: 0, bottom: 0, left: 0, right: 0, margin: "auto", backgroundColor: "white", minHeight: 215, maxHeight: 215, width: 400, borderRadius: 2}}>
         <div style={{display: "inline-block", marginLeft: 42, width: 300}}>
           <TextField value={this.state.email}
+                     error={!!this.props.error}
                      width={300}
                      inputLabel={"Email"}
                      handleTextChange={this.handleChangeEmail} />
@@ -57,6 +58,7 @@ class LoginForm extends React.Component {
           <input type="text" value={this.state.username} onChange={this.handleChangeUsername} />*/}
 
           <TextField value={this.state.password}
+                     error={!!this.props.error}
                      width={300}
                      inputLabel={"Password"}
                      type={"password"}
@@ -68,6 +70,8 @@ class LoginForm extends React.Component {
               <span>Not a member?</span>
               <span style={{color: "#0000ff", marginLeft: 5, cursor: "pointer"}} onClick={this.props.toggleForm}>Sign Up</span>
             </div>
+
+            {this.props.error ? <p style={{marginLeft: 8, marginTop: 10, fontSize: 12, color: "#f44336"}}>{this.props.error}</p> : <p></p>}
         </div>
       </div>
     );
@@ -76,7 +80,7 @@ class LoginForm extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    state
+    error: state.user.error
   };
 }
 function mapDispatchToProps(dispatch) {
