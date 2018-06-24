@@ -1,17 +1,17 @@
 import React from 'react';
 
-class ChannelListItem extends React.Component {
-  const styles = {
-    channelItem: {
-      position: "relative",
-      fontWeight: "bold", 
-      height: 50,
-      padding: "7px 12px",
-      borderBottom: "2px solid #eee",
-      cursor: "pointer"
-    }
+const styles = {
+  channelItem: {
+    position: "relative",
+    fontWeight: "bold",
+    height: 50,
+    padding: "7px 12px",
+    borderBottom: "2px solid #eee",
+    cursor: "pointer"
   }
+}
 
+class ChannelListItem extends React.Component {
   render() {
     return (
       <div className="channel-item"
