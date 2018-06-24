@@ -15,7 +15,7 @@ class ChannelListItem extends React.Component {
   render() {
     return (
       <div className="channel-item"
-           style={Object.assign(styles.channelItem, {backgroundColor: this.props.isSelected ? "#deeff5" : "#f0f8ff"})}
+           style={Object.assign({}, styles.channelItem, {backgroundColor: this.props.isSelected ? "#deeff5" : "#f0f8ff"})}
            onClick={this.props.select}>
         <span style={{position: "absolute", top: 22}}>{this.props.channel.name}</span>
       </div>

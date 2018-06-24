@@ -76,10 +76,10 @@ class ChatWindow extends React.Component {
     return (
       <div style={cardStyle}>
         <div id="chatwindow" style={{height: 400, overflowY: "scroll", overflowX: "hidden", width: "100%"}}>
-          <ActionCable channel={{channel: "MessagesChannel", channelId: selectedChannel}}
+          <ActionCable channel={{channel: "MessagesChannel", channelId: this.props.selectedChannel}}
                        onReceived={this.handleReceivedMessage} />
 
-          {selectedChannel ? <MessageList messages={this.props.messages} /> : <div></div>}
+          {this.props.selectedChannel ? <MessageList messages={this.props.messages} /> : <div></div>}
         </div>
 
         <MessageBox scrollToBottom={this.scrollToBottom} />
