@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 
@@ -19,6 +20,16 @@ class LoginPage extends React.Component {
   }
 
   render() {
+    if (this.props.currentUserFetching) {
+      return (
+        <div style={{height: "100vh", position: "relative"}}>
+          <div style={{position: "absolute", top: "40%", left: "calc(50% - 25px)"}}>
+            <CircularProgress size={50} />
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div style={{height: "100vh", position: "relative"}}>
         <div style={{backgroundColor: "#3f51b5", height: "40%", width: "100%"}}>
@@ -34,7 +45,7 @@ class LoginPage extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    state
+    currentUserFetching: state.user.fetching
   };
 }
 function mapDispatchToProps(dispatch) {

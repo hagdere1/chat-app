@@ -31,12 +31,14 @@ function MessageList(props) {
           {props.messages.map(message => {
             return (
               <TableRow key={message.id} style={{width: "100%", border: "0"}}>
-                <TableCell>
+                <TableCell style={{borderBottom: 0}}>
                   <div style={{width: "70%", overflow: "normal", display: "inline-block"}}>
                     <p style={{fontWeight: "bold", marginBottom: 5, color: "#3f51b5"}}>{message.user.username}</p>
                     <p style={{overflowWrap: "normal"}}>{message.content}</p>
                   </div>
-                  <div style={{width: "20%", display: "inline-block", verticalAlign: "top"}}>{moment(message.created_at).format("H:mm:ss a")}</div>
+                  <div style={{width: "20%", display: "inline-block", verticalAlign: "top"}}>
+                    <p style={{color: "#999"}}>{moment(message.created_at).format("H:mm:ss a")}</p>
+                  </div>
                 </TableCell>
               </TableRow>
             );

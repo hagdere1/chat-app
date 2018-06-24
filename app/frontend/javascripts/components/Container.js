@@ -9,7 +9,7 @@ import UserApi from '../api/userApi';
 class Container extends React.Component {
   componentDidMount() {
     let token = getCookie("token");
-debugger
+
     if (token) {
       this.props.fetchCurrentUser(token);
     }

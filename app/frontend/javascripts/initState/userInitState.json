@@ -1,5 +1,7 @@
 {
   "currentUser": {},
   "loginFailed": false,
-  "signUpFailed": false
+  "signUpFailed": false,
+  "fetching": false,
+  "fetched": false
 }

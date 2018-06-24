@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { axiosConfig } from './axiosConfig';
+import { startFetchingCurrentUser } from '../actions/userActions';
 
 class UserApi {
   static signUp(user) {
     return (dispatch) => {
       axios.post("/registrations", {user: user})
         .then(response => {
-          debugger
           dispatch({type: "SIGN_UP_USER_SUCCESS", payload: response.data.data})
         })
         .catch(error => {
@@ -41,9 +41,9 @@ class UserApi {
 
   static fetchCurrentUser(token) {
     return (dispatch) => {
+      dispatch(startFetchingCurrentUser());
       axios.get("/currentuser", axiosConfig(token))
         .then(response => {
-          debugger
           dispatch({type: "FETCH_CURRENT_USER_SUCCESS", payload: response.data.data})
         });
     }
