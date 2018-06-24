@@ -53,15 +53,12 @@ class ChatWindow extends React.Component {
   }
 
   sendMessage() {
-    let token = this.props.currentUser.auth_token;
     let message = {
       user_id: this.props.currentUser.id,
       content: this.state.content
     }
 
-    this.props.createMessage(message, this.props.selectedChannel, token);
-    // axios.post("/channels/" + this.props.selectedChannel + "/messages/", message, axiosConfig(token));
-
+    this.props.createMessage(message, this.props.selectedChannel, this.props.currentUser.auth_token);
     this.scrollToBottom();
     this.setState({ content: "" });
   }

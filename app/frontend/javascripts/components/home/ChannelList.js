@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import Card from '@material-ui/core/Card';
 import { selectChannel } from '../../actions/channelActions';
 import MessageApi from '../../api/messageApi';
+import ChannelListItem from './ChannelListItem';
 
 const cardStyle = {
   display: "inline-block",
@@ -17,7 +18,7 @@ class ChannelList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.selectChannel = this.selectChannel.bind(this);
+    // this.selectChannel = this.selectChannel.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -37,10 +38,12 @@ class ChannelList extends React.Component {
     let selectedChannel = this.props.selectedChannel;
     let channels = this.props.channels.map(channel => {
       let isSelected = channel.id === selectedChannel;
+
       return (
-        <div className="channel-item" key={channel.id} style={{position: "relative", fontWeight: "bold", backgroundColor: "#f0f8ff", height: 50, padding: "7px 12px", borderBottom: "2px solid #eee", cursor: "pointer"}} onClick={() => this.selectChannel(channel.id)}>
-          <span style={{position: "absolute", top: 22}}>{channel.name}</span>
-        </div>
+        <ChannelListItem key={channel.id}
+                         isSelected={isSelected}
+                         channel={channel}
+                         select={() => this.selectChannel(channel.id)} />
       );
     });
 
