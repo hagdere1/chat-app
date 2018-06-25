@@ -11,12 +11,12 @@ import moment from 'moment';
 
 const styles = theme => ({
   root: {
-    // width: '100%',
+    width: '100%',
     // overflowX: 'auto',
   },
   table: {
     // minWidth: 700,
-    // width: '100%'
+    width: '100%'
   },
 });
 

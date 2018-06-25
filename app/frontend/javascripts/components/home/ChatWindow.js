@@ -14,8 +14,8 @@ import MessageBox from './MessageBox';
 
 const cardStyle = {
   display: "inline-block",
-  width: "70%",
-  height: 500,
+  width: "100%",
+  height: "calc(100vh - 64px)",
   verticalAlign: "top",
   position: "relative"
 }
@@ -75,7 +75,7 @@ class ChatWindow extends React.Component {
 
     return (
       <div style={cardStyle}>
-        <div id="chatwindow" style={{height: 400, overflowY: "scroll", overflowX: "hidden", width: "100%"}}>
+        <div id="chatwindow" style={{height: "calc(100vh - 164px)", overflowY: "scroll", overflowX: "hidden", width: "100%"}}>
           <ActionCable channel={{channel: "MessagesChannel", channelId: this.props.selectedChannel}}
                        onReceived={this.handleReceivedMessage} />
 

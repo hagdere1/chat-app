@@ -7,6 +7,7 @@ import ChannelList from './ChannelList';
 import ChatWindow from './ChatWindow';
 import MenuAppBar from './MenuAppBar';
 import Card from '@material-ui/core/Card';
+import Grid from '@material-ui/core/Grid';
 
 class Home extends React.Component {
   componentDidMount() {
@@ -15,13 +16,25 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div style={{height: "100%"}}>
-        <MenuAppBar />
+      <div style={{maxWidth: 1010, margin: "auto"}}>
+        <Grid container={true}>
+          <Grid item={true} xs={12} >
+            <MenuAppBar />
+          </Grid>
 
-        <Card style={{margin: "auto", width: "100%", maxWidth: 1010}}>
-          <ChannelList />
-          <ChatWindow />
-        </Card>
+          <Grid item={true} xs={12}>
+            <Card style={{margin: "auto"}}>
+              <Grid container={true}>
+                <Grid item={true} xs={4}>
+                  <ChannelList />
+                </Grid>
+                <Grid item={true} xs={8}>
+                  <ChatWindow />
+                </Grid>
+              </Grid>
+            </Card>
+          </Grid>
+        </Grid>
       </div>
     );
   }

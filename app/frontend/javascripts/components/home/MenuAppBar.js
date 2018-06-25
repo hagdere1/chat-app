@@ -19,8 +19,8 @@ import Menu from '@material-ui/core/Menu';
 const styles = {
   root: {
     flexGrow: 1,
-    margin: "auto",
-    maxWidth: 1010
+    // margin: "auto",
+    // maxWidth: 1010
   },
   flex: {
     flex: 1,

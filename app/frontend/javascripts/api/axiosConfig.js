@@ -1,4 +1,4 @@
-const env = 'prod';
+const env = 'dev';
 
 export const axiosConfig = (token) => {
 	const fullToken = 'Token token=' + token;

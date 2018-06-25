@@ -8,9 +8,9 @@ import ChannelListItem from './ChannelListItem';
 
 const cardStyle = {
   display: "inline-block",
-  width: "calc(30% - 2px)",
+  width: "100%",
   borderRight: "2px solid #eee",
-  height: 500,
+  height: "calc(100vh - 64px)",
   verticalAlign: "top"
 }
 
