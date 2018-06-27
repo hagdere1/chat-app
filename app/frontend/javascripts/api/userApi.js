@@ -45,6 +45,9 @@ class UserApi {
       axios.get("/currentuser", axiosConfig(token))
         .then(response => {
           dispatch({type: "FETCH_CURRENT_USER_SUCCESS", payload: response.data.data})
+        })
+        .catch(error => {
+          dispatch({type: "FETCH_CURRENT_USER_FAILURE"})
         });
     }
   }

@@ -46,6 +46,10 @@ function userReducer(state = userInitState, action) {
         fetched: true
       });
 
+    case "FETCH_CURRENT_USER_FAILURE":
+      document.cookie = "token=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+      return state;
+
     default:
       return state;
   }
